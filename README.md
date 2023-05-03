@@ -35,3 +35,30 @@ Create 3 folders under the app directory - components, models, services
 change directory to the services directory (under src/app)
 run example command - ng g s super-hero --skip-tests
 
+## generating a component
+
+ng g c edit-hero --skip-tests
+
+## Can't bind to 'ngModel' since it isn't a known property of 'input'.ngtsc(-998002)
+
+This error usually occurs when you have not imported the FormsModule or ReactiveFormsModule in your Angular module. The ngModel directive is part of the FormsModule, and the formControlName directive is part of the ReactiveFormsModule. Therefore, you need to import the corresponding module in your module file.
+
+## Setting up the Edit Hero Component
+1. generated the component *reference above
+2. Edited the edit-hero view by adding in a form. 
+  2a. contains two way data binding using ngModel for each of the fields
+  2b. ngSubmit directive invokes the onSubmit function in the edit-hero component 
+3. Edited the edit-hero component.ts to: 
+
+  3a. import the superHeroService in the constructor 
+  3b. implement the onSubmit() function
+    - onSubmit function invokes the superHeroService.editSuperHero and passes in the hero object
+    - onSubmit function subscribes to the service method and emits an event with the return object (SuperHero array/list)
+
+4. edited the app.component.html view to implement the new edit-hero component
+
+  4a. Added a new table data row to the table body which contains an edit button
+    - upon clicking this edit button, it calls the editHero method in the app.component.ts and supplies the current hero from the selected row
+  4b. Added the edit-hero selector in the app.component.html file at the bottom
+    - Used input binding to send the hero object from the parent that was being edited to the child component
+    - used output binding to emit an event from the child when the superhero list was updated which calls a method in the parent component. this method will update the grid to reflect the updated list of heroes

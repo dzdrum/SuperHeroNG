@@ -16,4 +16,10 @@ export class SuperHeroService {
     
     return this.http.get<SuperHero[]>(`${environment.apiUrl}/${this.controllerUrl}`);
   }
+
+  public editSuperHero(superHero: SuperHero) : Observable<SuperHero[]> {
+    console.log(`${environment.apiUrl}/${this.controllerUrl}`);
+    console.log(this.http.put<SuperHero[]>(`${environment.apiUrl}/${this.controllerUrl}`, superHero));
+    return this.http.put<SuperHero[]>(`${environment.apiUrl}/${this.controllerUrl}`, superHero);
+  }
 }

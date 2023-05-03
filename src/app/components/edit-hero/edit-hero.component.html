@@ -1,0 +1,19 @@
+<form *ngIf="editHero" (ngSubmit)="onSubmit()" #heroForm="ngForm">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" name="name" [(ngModel)]="editHero.name" required>
+  </div>
+  <div>
+    <label for="firstName">First Name:</label>
+    <input type="text" name="firstName" [(ngModel)]="editHero.firstName" required>
+  </div>
+  <div>
+    <label for="lastName">Last Name:</label>
+    <input type="text" name="lastName" [(ngModel)]="editHero.lastName" required>
+  </div>
+  <div>
+    <label for="place">Place:</label>
+    <input type="text" name="place" [(ngModel)]="editHero.place" required>
+  </div>
+  <button type="submit" [disabled]="heroForm.invalid">Submit</button>
+</form>

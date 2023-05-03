@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'SuperHero.UI';
 
   heros: SuperHero[] = [];
+  heroToEdit?: SuperHero;
 
   constructor(private superHeroService: SuperHeroService) {}
 
@@ -18,5 +19,13 @@ export class AppComponent {
     this.superHeroService
       .getSuperHeros()
       .subscribe((result: SuperHero[]) => (this.heros = result));
+  }
+
+  heroesUpdated(heroes: SuperHero[]) {
+    this.heros = heroes;
+  }
+
+  editHero(hero: SuperHero) {
+    this.heroToEdit = hero;
   }
 }

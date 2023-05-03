@@ -11,7 +11,9 @@
       <td>{{ hero.firstName }}</td>
       <td>{{ hero.lastName }}</td>
       <td>{{ hero.place }}</td>
-
+      <td><button (click)="editHero(hero)">Edit</button></td>
     </tr>
   </tbody>
 </table>
+
+<app-edit-hero [editHero]="heroToEdit" (heroesUpdatedEventEmitter)="heroesUpdated"></app-edit-hero>

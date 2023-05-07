@@ -62,3 +62,38 @@ This error usually occurs when you have not imported the FormsModule or Reactive
   4b. Added the edit-hero selector in the app.component.html file at the bottom
     - Used input binding to send the hero object from the parent that was being edited to the child component
     - used output binding to emit an event from the child when the superhero list was updated which calls a method in the parent component. this method will update the grid to reflect the updated list of heroes
+
+
+## Unit Testing Overview
+
+Karma, the angular test runner, is looking for a specific naming convention.
+the test file should match the file name being tested exactly but with the addition of .spec.
+  Example-> compute.ts
+            compute.spec.ts
+
+Jasmine, our testing framework, provides methods for us to test our code
+
+  common methods include
+  1. describe() -> group of related tests //suite
+  2. it() -> individual test //spec
+
+      example
+          describe('compute', () => {
+            it('should return 0 if input is negative', () => {
+                //unit test
+            })
+
+            it('should increment the input if it is positive', () => {
+                //unit test
+            })
+          })
+
+  3. beforeEach(() => {}) -> Jasmine executes this before each spec in the suite. useful for common initializaiton/arrange code
+
+  4. afterEach(( => {})) -> Jasmine executes this after each spec in the suite, used for cleanup
+
+  5. beforeAll(() => {}) -> executed once before all tests in a suite
+
+  6. afterAll -> once after all the tests
+
+## Unit testing Structure

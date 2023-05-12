@@ -5,6 +5,7 @@ import { EditHeroComponent } from './edit-hero.component';
 import { SuperHeroService } from 'src/app/services/super-hero.service';
 import { SuperHero } from 'src/app/models/super-hero';
 import { Observable, of } from 'rxjs';
+import { By } from '@angular/platform-browser';
 
 describe('EditHeroComponent', () => {
   let component: EditHeroComponent;
@@ -23,7 +24,7 @@ describe('EditHeroComponent', () => {
       imports: [ FormsModule, HttpClientTestingModule ],
       providers: [ SuperHeroService ]
     })
-    .compileComponents();
+    .compileComponents(); // compiles the HTML and CSS
   });
 
   //this second before each block:
@@ -53,6 +54,21 @@ describe('EditHeroComponent', () => {
     const button = fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
     button.click();
     expect(component.onSubmit).toHaveBeenCalled();
+  });
+
+  it('form should be hidden by default and show when input value is provided', () => {
+    //reset the component input value
+    component.editHero = undefined;
+    fixture.detectChanges();
+    let button = fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
+    expect(button).toBeFalsy();
+    
+    const editHero: SuperHero = { id: 1, name: 'Spider-Man', firstName: 'Peter', lastName: 'Parker', place: 'New York City' };
+    component.editHero = editHero;
+    fixture.detectChanges();
+    button = fixture.debugElement.nativeElement.querySelector('button[type="submit"]');
+    expect(button).toBeTruthy();
+
   });
 
   it('should call editSuperHero method of SuperHeroService and emit heroesUpdatedEventEmitter event when the form is submitted', () => {

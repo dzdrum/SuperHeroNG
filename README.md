@@ -96,4 +96,30 @@ Jasmine, our testing framework, provides methods for us to test our code
 
   6. afterAll -> once after all the tests
 
+  The HeroService methods return Observables. You must subscribe to an observable to (a) cause it to execute and (b) assert that the method succeeds or fails.
+
+  The subscribe() method takes a success (next) and fail (error) callback. Make sure you provide both callbacks so that you capture errors. Neglecting to do so produces an asynchronous uncaught observable error that the test runner will likely attribute to a completely different test.
+
 ## Unit testing Structure
+
+  Describe {
+    beforeEach - Async: {
+      await TestBed.configureTestingModule {
+        //declares component under test
+        //imports necessary modules
+        //provides required services
+      }.compileComponents(); -> compiles HTML and CSS if needed
+    }
+    **above is async/await is used to resolve the promise from configureTestingModule. waits for completion before compiling components
+
+    beforeEach : {
+      //create fixture -> used to create a component instance
+      //create component instance -> using the fixture
+      //optionally set any input properties of the component (in case if there is perhaps an ngIf)
+      //calls fixture.detectChanges -> triggers change detection, causes the DOM/template to render and all child components are initialized
+    }
+
+    it('test case') {
+      //test
+    }
+  }
